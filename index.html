@@ -1,0 +1,46 @@
+﻿<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="Default.css" rel="stylesheet" type="text/css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+  <script src="Default.js"></script>
+  <meta charset="utf-8">
+</head>
+
+<body ng-app="myApp">
+ <div class="container" ng-controller="myController as myCtrl">
+   <div class="row">
+     <div class="drow col-md-12">
+      <div class="row">
+        <div class="drowbutton col-md-3 col-md-offset-4">
+          <button class="btn btn-primary btn-lg" ng-click="doDrow();">抽籤</button>
+        </div>
+        <div class="drowresult col-md-4">
+          <p>籤號:{{drow}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="result col-md-6 col-md-offset-3">
+      <table class="table table-hover">
+      <thead>
+        <tr>
+        <th>NO</th>
+        <th>籤號</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="drowed in drowedList | orderBy:'-no'">
+          <td>{{drowed.no}}</td>
+          <td>{{drowed.drow}}</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+   </div>
+ </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+var app = angular.module('myApp',[]);
+app.controller('myController',['$scope',function($scope){
+  var self = this;
+  //抽籤號碼
+  $scope.drowedList=[];
+  var isFirst=true,isRepeat=false;
+  $scope.doDrow=function(){
+    //判斷籤號
+    if($scope.drowedList.length==30){
+      alert("籤號已滿");
+    }
+    else{
+     //抽籤
+      self.doDrow();
+    }
+  };
+self.doDrow=function(){
+  //取亂數1~30
+  var rnd= Math.floor(Math.random()*30+1);
+  //第一次抽不判斷重複
+  if(isFirst){
+    $scope.drow=rnd;
+    $scope.drowedList.push({"no":1,"drow":rnd});
+    isFirst=false;
+  }
+  //判斷重複
+  else{
+    angular.forEach($scope.drowedList,function(value,key){
+      //如果沒重複就繼續判斷
+      if(!isRepeat){
+        //如果重複
+        if(rnd==$scope.drowedList[key].drow){
+          isRepeat=true;
+        }
+      }
+    })
+    //判斷完如果沒重複則新增一筆
+    if(!isRepeat){
+      $scope.drow=rnd;
+      $scope.drowedList.push({"no":$scope.drowedList.length+1,"drow":rnd});
+    }
+    //如果重複則重抽
+    else{
+      isRepeat=false;
+      self.doDrow();
+    }
+  }
+}
+}]);
